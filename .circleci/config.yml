@@ -1,0 +1,8 @@
+version: 2.1
+orbs:
+  ruby-rails: sul-dlss/ruby-rails@3.1.2
+workflows:
+  build:
+    jobs:
+      - ruby-rails/lint:
+          name: lint
