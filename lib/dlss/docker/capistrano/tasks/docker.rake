@@ -25,6 +25,7 @@ namespace :docker do
   task :add_hub_hooks do
     after 'deploy:starting', 'docker:login'
     after 'deploy:finishing', 'docker:logout'
+    after 'deploy:finishing_rollback', 'docker:logout'
   end
 
   desc 'Log in to Docker Hub'

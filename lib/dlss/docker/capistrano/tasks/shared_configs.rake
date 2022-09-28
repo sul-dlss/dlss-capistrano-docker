@@ -17,5 +17,6 @@ end
 namespace :shared_configs do
   task :add_hooks do
     before 'deploy:updating', 'shared_configs:update'
+    before 'deploy:reverting', 'shared_configs:update'
   end
 end

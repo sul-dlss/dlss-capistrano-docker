@@ -17,6 +17,7 @@ end
 namespace :honeybadger do
   task :add_hooks do
     after 'deploy:finishing', 'honeybadger:notify'
+    after 'deploy:finishing_rollback', 'honeybadger:notify'
   end
 
   # Replaces honeybadger:deploy to use curl instead of invoking ruby.
