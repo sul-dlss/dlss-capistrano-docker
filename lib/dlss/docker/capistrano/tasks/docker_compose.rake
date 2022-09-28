@@ -54,6 +54,7 @@ namespace :docker_compose do
 
   task :add_build_hooks do
     after 'deploy:updating', 'docker_compose:build'
+    after 'deploy:reverting', 'docker_compose:build'
   end
 
   task :add_rabbitmq_hooks do
@@ -149,7 +150,7 @@ namespace :docker_compose do
         execute(:docker, 'compose', '-f', fetch(:docker_compose_file), 'cp',
                 'app:/app/public/assets', '.')
         execute(:rm, '-fr', "#{assets_path}/*")
-        execute(:mkdir, assets_path)
+        execute(:mkdir, '-p', assets_path)
         execute(:cp, 'assets/*', "#{assets_path}/")
       end
       info 'Assets copied'
