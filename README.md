@@ -1,6 +1,8 @@
 # dlss-capistrano-docker
 
 [![Gem Version](https://badge.fury.io/rb/dlss-capistrano-docker.svg)](https://badge.fury.io/rb/dlss-capistrano-docker)
+[![CircleCI](https://circleci.com/gh/sul-dlss/dlss-capistrano-docker.svg?style=svg)](https://circleci.com/gh/sul-dlss/dlss-capistrano-docker)
+
 
 This gem provides Capistrano Docker deployment tasks used by Stanford Libraries' Digital Library Systems and Services group.
 
