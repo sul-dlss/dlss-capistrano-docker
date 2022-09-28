@@ -52,7 +52,7 @@ require 'dlss/capistrano'
 
 ### `config/deploy.rb`
 * For `:linked_files` remove `config/database.yml` and `config/secrets.yml` if present. Both of these will be provided by environment variables.
-* For `:linked_dirs` remove `tmp/pids`, `tmp/cache`, `tmp/sockets`, `public/system` if present. `log` and `config/settings` should remain.
+* For `:linked_dirs` remove `tmp/pids`, `tmp/cache`, `tmp/sockets` if present. `log`, `config/settings`, and, `public/system` should remain. (`public/system` is necessary for Capistrano::Maintenance.)
 * Remove any sidekiq, sneakers, passenger, whenever, or shared_configs related settings.
 * Add `set :docker_compose_file, 'docker-compose.prod.yml'` to reference the production docker-compose file.
 * Optionally, add `set :docker_compose_seed_use_hooks, true` to perform seeding.
