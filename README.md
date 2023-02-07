@@ -19,7 +19,7 @@ It requires that the services to be run on a server be specified by a docker com
 * `docker_compose:build`: build images for the services.
 * `docker_compose:setup_rabbit`: create channel, queues, etc for RabbitMQ.
 * `docker_compose:restart`: down then up services.
-* `docker_compose:up`: stop services.
+* `docker_compose:up`: start services.
 * `docker_compose:down`: tear down services.
 * `docker_compose:copy_assets`: copy assets from a container to the server so they can be served by Apache.
 * `docker_compose:dereference_linked_files`: turn linked files into actual files.
