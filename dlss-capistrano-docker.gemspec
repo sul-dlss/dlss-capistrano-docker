@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   # All dependencies are runtime dependencies, since this gem's "runtime" is
   # the dependent gem's development-time.
   s.add_dependency "capistrano", "~> 3.0"
+  s.add_dependency "capistrano-bundle_audit", ">= 0.3.0"
   s.add_dependency "capistrano-one_time_key"
   s.add_dependency "capistrano-shared_configs"
 
