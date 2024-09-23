@@ -10,6 +10,7 @@ It requires that the services to be run on a server be specified by a docker com
 
 ## Included Tasks
 * `ssh`: establishes an SSH connection to the host running in environment, and changes into the current deployment directory.
+* `ssh_check`: establishes an SSH connection to all app servers running prints environment information to confirm the connection was made. (This is used by sdr-deploy to check SSH connections can be made in bulk before proceeding with a mass deploy.)
 * `honeybadger:notify`: notifies Honeybadger of deploy using curl (thus, ruby is not required on host).
 * `docker:login`: log into Docker Hub. Logging in is required to avoid strict image download limits.
 * `docker:logout`: log out of Docker Hub.
