@@ -47,7 +47,7 @@ GEM
       net-ssh (>= 2.6.5, < 8.0.0)
     net-sftp (4.0.0)
       net-ssh (>= 5.0.0, < 8.0.0)
-    net-ssh (7.2.3)
+    net-ssh (7.3.0)
     ostruct (0.6.0)
     parallel (1.26.3)
     parser (3.3.5.0)
