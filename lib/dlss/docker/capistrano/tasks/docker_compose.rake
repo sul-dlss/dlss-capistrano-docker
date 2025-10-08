@@ -42,6 +42,7 @@ namespace :deploy do
   before :starting, :add_docker_hooks do
     if fetch(:docker_compose_check_running_airflow_dag_use_hooks)
       invoke 'docker_compose:check_running_airflow_dag_hooks'
+      info "DAG id is: #{fetch(:airflow_dag_id)}"
     end
     invoke 'docker_compose:add_migrate_hooks' if fetch(:docker_compose_migrate_use_hooks)
     invoke 'docker_compose:add_seed_hooks' if fetch(:docker_compose_seed_use_hooks)
