@@ -28,12 +28,21 @@ namespace :load do
     set :copy_assets_role, fetch(:copy_assets_role, :app)
     set :assets_path, fetch(:assets_path, 'public/assets')
     set :docker_compose_copy_assets_use_hooks, fetch(:docker_compose_copy_assets_use_hooks, true)
+
+    set :docker_compose_check_running_airflow_dag_use_hooks,
+        fetch(:docker_compose_check_running_airflow_dag_use_hooks, false)
+    set :airflow_dag_id, fetch(:airflow_dag_id, nil)
+    set :airflow_dag_running_command,
+        fetch(:airflow_dag_running_command, "airflow dags list-runs -d #{fetch(:airflow_dag_id)} --state running")
   end
 end
 
 # Integrate hooks into Capistrano
 namespace :deploy do
   before :starting, :add_docker_hooks do
+    if fetch(:docker_compose_check_running_airflow_dag_use_hooks)
+      invoke 'docker_compose:check_running_airflow_dag_hooks'
+    end
     invoke 'docker_compose:add_migrate_hooks' if fetch(:docker_compose_migrate_use_hooks)
     invoke 'docker_compose:add_seed_hooks' if fetch(:docker_compose_seed_use_hooks)
     invoke 'docker_compose:add_build_hooks' if fetch(:docker_compose_build_use_hooks)
@@ -44,6 +53,25 @@ namespace :deploy do
 end
 
 namespace :docker_compose do
+  desc 'Check for running Airflow DAG'
+  task :check_running_airflow_dag_hooks do
+    on roles(fetch(:build_roles)) do
+      within current_path do
+        # exec -it airflow-worker  /bin/bash -c "airflow dags list-runs -d harvest --state running"
+        execute(:docker, 'compose', 'exec', '-it', 'airflow-worker', '/bin/bash', '-c',
+                fetch(:airflow_dag_running_command))
+        # if the output of the above command is anything other than "No data found"
+        # then a DAG is running and the deploy should exit
+        if test "[ $(#{fetch(:airflow_dag_running_command)}) != *'No data found'* ]"
+          error "Airflow DAG #{fetch(:airflow_dag_id)} is currently running. Aborting deploy."
+          exit 1
+        else
+          info "No running DAG found for #{fetch(:airflow_dag_id)}. Continuing with deploy."
+        end
+      end
+    end
+  end
+
   task :add_migrate_hooks do
     after 'deploy:publishing', 'docker_compose:migrate'
   end
