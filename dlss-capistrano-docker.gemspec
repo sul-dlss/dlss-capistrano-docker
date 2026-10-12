@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/sul-dlss/dlss-capistrano-docker'
   s.license     = "Apache-2.0"
 
-  s.required_ruby_version = '>= 3.0', '< 4'
+  s.required_ruby_version = '>= 3.0', '< 5'
 
   # All dependencies are runtime dependencies, since this gem's "runtime" is
   # the dependent gem's development-time.
