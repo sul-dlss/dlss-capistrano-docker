@@ -8,6 +8,10 @@ This gem provides Capistrano Docker deployment tasks used by Stanford Libraries'
 
 It requires that the services to be run on a server be specified by a docker compose configuration file.
 
+## Development
+
+Use Ruby 4.0.7 for development and testing.
+
 ## Included Tasks
 * `ssh`: establishes an SSH connection to the host running in environment, and changes into the current deployment directory.
 * `ssh_check`: establishes an SSH connection to all app servers running prints environment information to confirm the connection was made. (This is used by sdr-deploy to check SSH connections can be made in bulk before proceeding with a mass deploy.)
@@ -72,7 +76,7 @@ require 'dlss/capistrano'
 * Add `set :job_template, nil` to execute with sh instead of bash.
 
 ### `Dockerfile`
-* When possible, base the image on Alpine (e.g., `FROM ruby:3.1-alpine`).
+* When possible, base the image on Alpine (e.g., `FROM ruby:4.0.7-alpine`).
 * Processes should run as the application user (e.g., `h2`) not root, with user id and group id set to match the server.
 * If using Whenever, install Supercronic (which does not have to run as root) and write the crontab file during the build with `RUN sh -c 'bundle exec whenever . | tee -a config/crontab'`.
 * When possible, write to both a log file and stdout.

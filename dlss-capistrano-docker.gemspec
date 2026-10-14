@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = "dlss-capistrano-docker"
-  s.version     = '1.2.0'
+  s.version     = '1.3.0'
 
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Justin Littman']
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/sul-dlss/dlss-capistrano-docker'
   s.license     = "Apache-2.0"
 
-  s.required_ruby_version = '>= 3.0', '< 4'
+  s.required_ruby_version = '>= 3.0', '< 5'
 
   # All dependencies are runtime dependencies, since this gem's "runtime" is
   # the dependent gem's development-time.
